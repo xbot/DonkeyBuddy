@@ -2,7 +2,7 @@
 
 = Features =
 
-  # Users can shoose how to interact with MLDonkey, either by AJAX or popup windows.
+  # Users can choose how to interact with MLDonkey, either by AJAX or popup windows.
   # The AJAX mode interacts with MLDonkey by AJAX requests and uses desktop notifications to show the results, so it won't bother you by popping up windows and forcing you to close them.
   # The popup-window mode interacts MLDonkey by popping up a window and displays results in it, this is always a reliable way to add downloads but annoying.
   # An icon will be displayed in the location bar only when downloadable resources are found in the current tab, so it saves you the space in both toolbar and location bar.
