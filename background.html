@@ -1,0 +1,52 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <script type="text/javascript" charset="utf-8">
+        if (!isurl(localStorage['clientURL'])) localStorage['clientURL'] = 'http://localhost:4080';
+        if (null == localStorage['hook']) localStorage['hook'] = 'ajax';
+        if (null == localStorage['notifyTimeout']) localStorage['notifyTimeout'] = 5000;
+        if (null == localStorage['AJAXTimeout']) localStorage['AJAXTimeout'] = 3000;
+
+        function onRequest(request, sender, sendResponse) {
+            if (1 == request.ed2kFound) {
+                chrome.pageAction.show(sender.tab.id);
+                sendResponse({});
+                return;
+            }
+
+            if (1 == request.getOptions) {
+                sendResponse({options:localStorage});
+                return;
+            }
+
+            if (1 == request.notify) {
+                shownotification(request.success, request.task);
+                if (typeof(webkitNotifications) != 'undefined')
+                    sendResponse({});
+                else
+                    sendResponse({alert:1});
+                return;
+            }
+        }
+
+        function shownotification(success, task) {
+            var msg = '';
+            if (1 == success)
+                msg = 'Successfully added:';
+            else
+                msg = 'Failed to add:';
+
+            var notification = webkitNotifications.createNotification('donkey.ico', msg, task);
+            notification.show();
+            setTimeout(function(){notification.cancel();}, localStorage['notifyTimeout']);
+        }
+
+        function isurl(url) {
+            var regex = /^http[s]?:\/\/.+/;
+            return regex.test(url);
+        }
+
+        chrome.extension.onRequest.addListener(onRequest);
+    </script>
+</head>
+</html>

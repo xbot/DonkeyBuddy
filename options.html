@@ -1,0 +1,141 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Donkey Buddy Settings</title>
+    <script src="jquery.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        function RestoreSettings() {
+            var clientURL = localStorage['clientURL'];
+            if (isurl(clientURL)) {
+                $('#inputClientURL').val(clientURL);
+            } else {
+                $('#inputClientURL').val('http://localhost:4080');
+            }
+
+            var hook = localStorage['hook'];
+            if ('popup' == hook) {
+                $('input[name=hook_type]').get(1).checked = true;
+            } else {
+                $('input[name=hook_type]').get(0).checked = true;
+            }
+
+            var notifyTimeout = localStorage['notifyTimeout'];
+            if (parseInt(notifyTimeout) == notifyTimeout) {
+                $('#inputNotifyTimeout').val(notifyTimeout);
+            } else {
+                $('#inputNotifyTimeout').val(5000);
+            }
+
+            var AJAXTimeout = localStorage['AJAXTimeout'];
+            if (parseInt(AJAXTimeout) == AJAXTimeout) {
+                $('#inputAJAXTimeout').val(AJAXTimeout);
+            } else {
+                $('#inputAJAXTimeout').val(3000);
+            }
+        }
+
+        function SaveSettings() {
+            var url = $('#inputClientURL').val();
+            var hook = $('input:checked[name=hook_type]').val();
+            var notifytimeout = $('#inputNotifyTimeout').val();
+            var ajaxtimeout = $('#inputAJAXTimeout').val();
+
+            if (!isurl(url)) {
+                alert('URL is invalid !');
+                return false;
+            }
+            if (parseInt(notifytimeout) != notifytimeout) {
+                alert('Notify timeout must be an integer !');
+                return false;
+            }
+            if (parseInt(ajaxtimeout) != ajaxtimeout) {
+                alert('AJAX timeout must be an integer !');
+                return false;
+            }
+
+            localStorage['clientURL'] = url;
+            localStorage['hook'] = hook;
+            localStorage['notifyTimeout'] = notifytimeout;
+            localStorage['AJAXTimeout'] = ajaxtimeout;
+        }
+
+        function isurl(url) {
+            var regex = /^http[s]?:\/\/.+/;
+            return regex.test(url);
+        }
+    </script>
+    <style type="text/css" media="screen">
+        .plate {
+            margin-left:auto;
+            margin-right:auto;
+            border:1px dashed;
+            width:600px;
+            padding:10px;
+            background-color:#96ff38;
+        }
+        .title {
+            border-bottom: 1px solid;
+            margin-bottom: 10px;
+            margin-top:250px;
+        }
+        .title_icon {
+            float:left;
+        }
+        .title_1 {
+            float:left;
+            font-size:32px;
+            font-weight:bold;
+            font-family:"Comic Sans MS";
+            margin-left:300px;
+            margin-top:-195px;
+        }
+        .title_2 {
+            float:left;
+            font-size:48px;
+            font-weight:bold;
+            font-family:"Comic Sans MS";
+            margin-left:360px;
+            margin-top:-135px;
+        }
+        th {
+            text-align:left;
+            width:300;
+        }
+    </style>
+</head>
+<body onload="RestoreSettings();">
+    <div class="plate">
+        <div class="title_icon">
+            <img src="donkey.ico"/>
+        </div>
+        <div class="title_1">Donkey</div>
+        <div class="title_2">Buddy</div>
+        <div class="title">
+        </div>
+        <table border="0">
+            <tr>
+                <th>MLDonkey URL:</th>
+                <td><input type="text" id="inputClientURL" size="50"/></td>
+            </tr>
+            <tr>
+                <th>Notification timeout:</th>
+                <td><input type="text" id="inputNotifyTimeout"/>ms</td>
+            </tr>
+            <tr>
+                <th>AJAX timeout:</th>
+                <td><input type="text" id="inputAJAXTimeout"/>ms</td>
+            </tr>
+            <tr>
+                <th>Mode:</th>
+                <td>
+                    AJAX<input type="radio" name="hook_type" value="ajax"/>
+                    Popup<input type="radio" name="hook_type" value="popup"/>
+                </td>
+            </tr>
+        </table>
+        <div id="divButtons">
+            <input type="button" id="btnSaveSettings" onclick="SaveSettings();" value="Save"/>
+        </div>
+    </div>
+</body>
+</html>

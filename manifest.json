@@ -1,0 +1,27 @@
+{
+    "name" : "Donkey Buddy",
+    "version" : "1.0",
+    "description" : "Interact with mldonkey and add downloading tasks automatically when you click links.",
+    "permissions" : ["http://*/*", "https://*/*", "notifications"],
+    "options_page" : "options.html",
+    "background_page" : "background.html",
+    "page_action" : {
+        "default_icon" : "donkey.ico",
+        "default_title" : "Downloadable resources found !"
+    },
+    "content_scripts" : [
+        {
+            "matches" : ["http://*/*", "https://*/*"],
+            "js" : ["jquery.js", "content.js"],
+            "runat" : "document_idle",
+            "all_frames" : false
+        }
+    ],
+    "icons" : {
+        "128" : "donkey.ico",
+        "64" : "donkey.ico",
+        "48" : "donkey.ico",
+        "32" : "donkey.ico",
+        "16" : "donkey.ico"
+    }
+}
