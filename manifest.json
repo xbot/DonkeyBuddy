@@ -1,6 +1,6 @@
 {
     "name" : "Donkey Buddy",
-    "version" : "1.0",
+    "version" : "1.0.1",
     "description" : "Interact with mldonkey and add downloading tasks automatically when you click links.",
     "permissions" : ["http://*/*", "https://*/*", "notifications"],
     "options_page" : "options.html",

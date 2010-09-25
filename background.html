@@ -5,7 +5,7 @@
         if (!isurl(localStorage['clientURL'])) localStorage['clientURL'] = 'http://localhost:4080';
         if (null == localStorage['hook']) localStorage['hook'] = 'ajax';
         if (null == localStorage['notifyTimeout']) localStorage['notifyTimeout'] = 5000;
-        if (null == localStorage['AJAXTimeout']) localStorage['AJAXTimeout'] = 3000;
+        if (null == localStorage['AJAXTimeout']) localStorage['AJAXTimeout'] = 1000;
 
         function onRequest(request, sender, sendResponse) {
             if (1 == request.ed2kFound) {
