@@ -6,6 +6,7 @@
   # The AJAX mode interacts with MLDonkey by AJAX requests and uses desktop notifications to show the results, so it won't bother you by popping up windows and forcing you to close them.
   # The popup-window mode interacts MLDonkey by popping up a window and displays results in it, this is always a reliable way to add downloads but annoying.
   # An icon will be displayed in the location bar only when downloadable resources are found in the current tab, so it saves you the space in both toolbar and location bar.
+  # Batch downloading.
 
 = FAQ =
 
@@ -15,8 +16,16 @@
     # If you are still in trouble, use the popup-windows mode instead.
   # *Why a failure notification pops up when the downloading task has acturally been added ?*
     # Take a look at the upper question.
+  # *How can I send the selected links to MLDonkey in one click ?*
+    # Click on this extension's icon in the address bar.
 
 = Change log =
+
+*version 1.1.0 (2011-05-15 Sunday)*
+
+  # Enable batch downloading for VeryCD.com.
+
+----
 
 *version 1.0.1 (2010-09-25 Saturday)*
 

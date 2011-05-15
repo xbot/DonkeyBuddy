@@ -10,6 +10,24 @@
         function onRequest(request, sender, sendResponse) {
             if (1 == request.ed2kFound) {
                 chrome.pageAction.show(sender.tab.id);
+                chrome.pageAction.onClicked.addListener(function(tab){
+                    // Only for VeryCD.com
+                    if (!isverycd(tab.url)){
+                        alert('Only VeryCD.com is allowed to batch download currently.');
+                        return;
+                    }
+
+                    // Confirm downloading
+                    if (!confirm('Download all the selected resources now ?')){
+                        return;
+                    }
+
+                    // Send order to content.js
+                    chrome.tabs.getSelected(null,function(tab){
+                        chrome.tabs.sendRequest(tab.id,{startDownload:1},function(response){
+                        });
+                    });
+                });
                 sendResponse({});
                 return;
             }
@@ -43,6 +61,11 @@
 
         function isurl(url) {
             var regex = /^http[s]?:\/\/.+/;
+            return regex.test(url);
+        }
+
+        function isverycd(url) {
+            var regex = /^http:\/\/.*\.verycd\.com\/.*$/;
             return regex.test(url);
         }
 

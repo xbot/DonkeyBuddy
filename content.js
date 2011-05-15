@@ -1,12 +1,53 @@
 if (finded2k()) {
+    // Show page action
     chrome.extension.sendRequest({ed2kFound:1}, function(response){});
 
+    // Hook onClick actions for ed2k links
     chrome.extension.sendRequest({getOptions:1}, function(response){
         options = response.options;
         if ('popup' == options['hook'])
             hooked2kpopup(options['clientURL']);
         else
             hooked2kajax(options['clientURL'], options['AJAXTimeout']);
+    });
+
+    // Add listener for page action clicks
+    chrome.extension.onRequest.addListener(function(request,sender,sendResponse){
+        if (1 == request.startDownload) {
+            var attrs = $('input[onclick*="download"]')[0].attributes;
+            var clickstr = '';
+            for(var i in attrs){
+                if(attrs[i].name == 'onclick'){
+                    clickstr = attrs[i].firstChild.data;
+                    break;
+                }
+            }
+            var groupName = clickstr.substring(clickstr.indexOf("'")+1,clickstr.lastIndexOf("'"));
+            var checkboxes = document.getElementsByName(groupName);
+
+            chrome.extension.sendRequest({getOptions:1}, function(response){
+                var options = response.options;
+                var itemName = 'Scheduled resource.';
+                for (var i = 0; i < checkboxes.length; i++) {
+                    if(checkboxes[i].checked){
+                        $.ajax({
+                            type:"GET",
+                            url:options['clientURL']+"/submit?q="+escape(checkboxes[i].value),
+                            timeout:options['AJAXTimeout'],
+                            success:function(successResponse){
+                                chrome.extension.sendRequest({notify:1,success:1,task:itemName}, function(response){
+                                });
+                            },
+                            error:function(req, msg){
+                                chrome.extension.sendRequest({notify:1,success:0,task:itemName}, function(response){
+                                });
+                            }
+                        });
+                    }
+                };
+            });
+        };
+        sendResponse({});
     });
 }
 
