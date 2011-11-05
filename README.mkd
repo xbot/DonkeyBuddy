@@ -17,7 +17,7 @@ FAQ
 
 * **Why a success notification pops up when I haven't even started MLDonkey ?**
   * Since the responses of the cross-domain AJAX requests have an empty message and a status which has the value 0, so I can't identify that whether they are successful or not.
-* But when MLDonkey is not running, AJAX requests always take more time to receive responses, so if a request has not received its reponse within a reasonable time, DonkeyBuddy will take it as a failure. So you should set the **AJAX timeout** option to a suitable value on your condition.
+  * But when MLDonkey is not running, AJAX requests always take more time to receive responses, so if a request has not received its reponse within a reasonable time, DonkeyBuddy will take it as a failure. So you should set the **AJAX timeout** option to a suitable value on your condition.
   * If you are still in trouble, use the popup-windows mode instead.
 * **Why a failure notification pops up when the downloading task has acturally been added ?**
   * Take a look at the upper question.
