@@ -12,6 +12,12 @@ Features
 * An icon will be displayed in the location bar only when downloadable resources are found in the current tab, so it saves you the space in both toolbar and location bar.
 * Batch downloading.
 
+Links
+-----
+
+* Chrome Store: https://chrome.google.com/webstore/detail/hbajjpcakkngealbehjippmdbfapodnn
+* Homepage:     http://0x3f.org/?p=1662
+
 FAQ
 ---
 
